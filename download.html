@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记账本 APP 下载</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 32px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        .icon { font-size: 72px; margin-bottom: 16px; }
+        .title { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 8px; }
+        .subtitle { font-size: 14px; color: #6B7280; margin-bottom: 24px; line-height: 1.6; }
+        .platform-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: #F3F4F6;
+            border-radius: 12px;
+            padding: 4px;
+        }
+        .tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            background: #fff;
+            color: #4F46E5;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .platform-content { display: none; }
+        .platform-content.active { display: block; }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 12px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4F46E5, #6366F1);
+            color: #fff;
+        }
+        .btn-secondary {
+            background: #F3F4F6;
+            color: #4F46E5;
+        }
+        .btn:active { transform: scale(0.97); }
+        .info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E5E7EB;
+            font-size: 12px;
+            color: #9CA3AF;
+            line-height: 1.8;
+            text-align: left;
+        }
+        .info strong { color: #6B7280; }
+        .size { font-size: 13px; color: #6B7280; margin-top: 4px; }
+        .badge {
+            display: inline-block;
+            background: #D1FAE5;
+            color: #10B981;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">💰</div>
+        <div class="title">记账本</div>
+        <div class="subtitle">简单好用的个人记账工具<br>支持收支记录、分类统计、月度分析</div>
+
+        <div class="platform-tabs">
+            <button class="tab active" onclick="showPlatform('android')">Android</button>
+            <button class="tab" onclick="showPlatform('ios')">iOS</button>
+        </div>
+
+        <!-- Android 下载 -->
+        <div class="platform-content active" id="platform-android">
+            <a class="btn btn-primary" href="/accounting.apk" download>⬇ 下载 APK 安装包</a>
+            <a class="btn btn-secondary" href="/index.html">🌐 使用网页版（PWA）</a>
+            <div class="size">APK 大小: 约 4MB</div>
+            <div class="info">
+                <strong>📦 APK 安装步骤：</strong><br>
+                1. 点击"下载 APK 安装包"<br>
+                2. 浏览器提示风险，选"仍要下载"<br>
+                3. 打开下载的 APK 文件<br>
+                4. 允许"安装未知应用"<br>
+                5. 安装完成后打开"记账本"<br><br>
+                <strong>🌐 PWA 网页版：</strong><br>
+                点击"使用网页版"→ 浏览器菜单 →"添加到主屏幕"，即可像 App 一样使用
+            </div>
+        </div>
+
+        <!-- iOS 下载 -->
+        <div class="platform-content" id="platform-ios">
+            <a class="btn btn-primary" href="/index.html">🚀 使用网页版 App</a>
+            <div class="info">
+                <strong>🍎 iOS 安装步骤（PWA）：</strong><br>
+                1. 用 Safari 浏览器打开本页面<br>
+                2. 点击"使用网页版 App"<br>
+                3. 在页面加载后，点击 Safari 底部的分享按钮 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='%234F46E5'%3E%3Cpath d='M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z'/%3E%3C/svg%3E" alt="分享"><br>
+                4. 选择"添加到主屏幕"<br>
+                5. 点击"添加"<br>
+                6. 桌面出现"记账本"图标，点击即可使用<br><br>
+                <strong>⚠️ 注意：</strong><br>
+                • 必须使用 <strong>Safari</strong> 浏览器<br>
+                • iOS 不支持安装 APK 文件<br>
+                • PWA 版本功能与原生 App 一致
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPlatform(platform) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.platform-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('platform-' + platform).classList.add('active');
+        }
+
+        // 自动检测平台
+        const ua = navigator.userAgent;
+        if (/iPhone|iPad|iPod/.test(ua)) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.platform-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab')[1].classList.add('active');
+            document.getElementById('platform-ios').classList.add('active');
+        }
+    </script>
+</body>
+</html>
