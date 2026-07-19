@@ -1,0 +1,35 @@
+{
+    "name": "记账本 - 轻松理财",
+    "short_name": "记账本",
+    "description": "简单好用的个人记账工具，支持收支记录、分类统计、月度分析",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#F3F4F6",
+    "theme_color": "#4F46E5",
+    "lang": "zh-CN",
+    "categories": ["finance", "utilities"],
+    "icons": [
+        {
+            "src": "icons/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "icons/icon.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "记一笔",
+            "short_name": "记账",
+            "url": "./index.html?action=add",
+            "icons": [{"src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml"}]
+        }
+    ]
+}
