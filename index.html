@@ -2,144 +2,166 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#4F46E5">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="记账本">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icons/icon.svg">
-    <title>记账本 - 轻松理财</title>
-    <link rel="stylesheet" href="app.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记账本 APP 下载</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 32px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        .icon { font-size: 72px; margin-bottom: 16px; }
+        .title { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 8px; }
+        .subtitle { font-size: 14px; color: #6B7280; margin-bottom: 24px; line-height: 1.6; }
+        .platform-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: #F3F4F6;
+            border-radius: 12px;
+            padding: 4px;
+        }
+        .tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            background: #fff;
+            color: #4F46E5;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .platform-content { display: none; }
+        .platform-content.active { display: block; }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 12px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4F46E5, #6366F1);
+            color: #fff;
+        }
+        .btn-secondary {
+            background: #F3F4F6;
+            color: #4F46E5;
+        }
+        .btn:active { transform: scale(0.97); }
+        .info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E5E7EB;
+            font-size: 12px;
+            color: #9CA3AF;
+            line-height: 1.8;
+            text-align: left;
+        }
+        .info strong { color: #6B7280; }
+        .size { font-size: 13px; color: #6B7280; margin-top: 4px; }
+        .badge {
+            display: inline-block;
+            background: #D1FAE5;
+            color: #10B981;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 4px;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <!-- 头部导航 -->
-        <header class="app-header">
-            <div class="header-top">
-                <div class="brand">
-                    <span class="brand-icon">💰</span>
-                    <h1 class="brand-title">记账本</h1>
-                </div>
-                <button class="btn-add" id="btnAdd" aria-label="记一笔">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                    <span>记一笔</span>
-                </button>
-            </div>
-            <!-- 月份选择器 -->
-            <div class="month-picker" id="monthPicker">
-                <button class="month-arrow" id="prevMonth" aria-label="上一月">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-                </button>
-                <span class="month-label" id="monthLabel"></span>
-                <button class="month-arrow" id="nextMonth" aria-label="下一月">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-                </button>
-            </div>
-        </header>
+    <div class="card">
+        <div class="icon">💰</div>
+        <div class="title">记账本</div>
+        <div class="subtitle">简单好用的个人记账工具<br>支持收支记录、分类统计、月度分析</div>
 
-        <!-- 统计卡片 -->
-        <section class="stats-section" id="statsSection">
-            <div class="stats-card">
-                <div class="stat-item stat-income">
-                    <span class="stat-label">收入</span>
-                    <span class="stat-value" id="totalIncome">0.00</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item stat-expense">
-                    <span class="stat-label">支出</span>
-                    <span class="stat-value" id="totalExpense">0.00</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item stat-balance">
-                    <span class="stat-label">结余</span>
-                    <span class="stat-value" id="totalBalance">0.00</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tab 切换 -->
-        <div class="tab-bar">
-            <button class="tab-btn active" data-tab="list">明细</button>
-            <button class="tab-btn" data-tab="chart">统计</button>
+        <div class="platform-tabs">
+            <button class="tab active" onclick="showPlatform('android')">Android</button>
+            <button class="tab" onclick="showPlatform('ios')">iOS</button>
         </div>
 
-        <!-- 记录列表 -->
-        <section class="tab-content active" id="tabList">
-            <div class="transaction-list" id="transactionList">
-                <div class="empty-state">
-                    <div class="empty-icon">📭</div>
-                    <div class="empty-text">暂无记录</div>
-                    <div class="empty-hint">点击右上角"记一笔"开始记账</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 统计图表 -->
-        <section class="tab-content" id="tabChart">
-            <div class="chart-section" id="chartSection"></div>
-        </section>
-
-        <!-- 添加记录弹窗 -->
-        <div class="modal-overlay" id="addModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>记一笔</h2>
-                    <button class="modal-close" id="modalClose" aria-label="关闭">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    </button>
-                </div>
-                <form id="addForm">
-                    <!-- 收入/支出切换 -->
-                    <div class="type-toggle">
-                        <button type="button" class="type-btn active" data-type="expense">支出</button>
-                        <button type="button" class="type-btn" data-type="income">收入</button>
-                    </div>
-                    <!-- 金额 -->
-                    <div class="form-group">
-                        <label class="form-label">金额</label>
-                        <div class="amount-input-wrap">
-                            <span class="currency-sign">¥</span>
-                            <input type="number" id="inputAmount" class="amount-input" placeholder="0.00" step="0.01" min="0.01" inputmode="decimal" required>
-                        </div>
-                    </div>
-                    <!-- 分类 -->
-                    <div class="form-group">
-                        <label class="form-label">分类</label>
-                        <div class="category-grid" id="categoryGrid"></div>
-                    </div>
-                    <!-- 备注 -->
-                    <div class="form-group">
-                        <label class="form-label">备注</label>
-                        <input type="text" id="inputNote" class="form-input" placeholder="添加备注（可选）" maxlength="50">
-                    </div>
-                    <!-- 日期 -->
-                    <div class="form-group">
-                        <label class="form-label">日期</label>
-                        <input type="date" id="inputDate" class="form-input" required>
-                    </div>
-                    <!-- 提交 -->
-                    <button type="submit" class="btn-submit" id="btnSubmit">保存</button>
-                </form>
+        <!-- Android 下载 -->
+        <div class="platform-content active" id="platform-android">
+            <a class="btn btn-primary" href="./accounting.apk" download>⬇ 下载 APK 安装包</a>
+            <a class="btn btn-secondary" href="./app.html">🌐 使用网页版（PWA）</a>
+            <div class="size">APK 大小: 约 4MB</div>
+            <div class="info">
+                <strong>📦 APK 安装步骤：</strong><br>
+                1. 点击"下载 APK 安装包"<br>
+                2. 浏览器提示风险，选"仍要下载"<br>
+                3. 打开下载的 APK 文件<br>
+                4. 允许"安装未知应用"<br>
+                5. 安装完成后打开"记账本"<br><br>
+                <strong>🌐 PWA 网页版：</strong><br>
+                点击"使用网页版"→ 浏览器菜单 →"添加到主屏幕"，即可像 App 一样使用
             </div>
         </div>
 
-        <!-- 删除确认 -->
-        <div class="modal-overlay" id="deleteModal">
-            <div class="confirm-dialog">
-                <div class="confirm-icon">🗑️</div>
-                <div class="confirm-text">确定删除这条记录吗？</div>
-                <div class="confirm-actions">
-                    <button class="btn-cancel" id="cancelDelete">取消</button>
-                    <button class="btn-confirm-delete" id="confirmDelete">删除</button>
-                </div>
+        <!-- iOS 下载 -->
+        <div class="platform-content" id="platform-ios">
+            <a class="btn btn-primary" href="./app.html">🚀 使用网页版 App</a>
+            <div class="info">
+                <strong>🍎 iOS 安装步骤（PWA）：</strong><br>
+                1. 用 Safari 浏览器打开本页面<br>
+                2. 点击"使用网页版 App"<br>
+                3. 在页面加载后，点击 Safari 底部的分享按钮 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='%234F46E5'%3E%3Cpath d='M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z'/%3E%3C/svg%3E" alt="分享"><br>
+                4. 选择"添加到主屏幕"<br>
+                5. 点击"添加"<br>
+                6. 桌面出现"记账本"图标，点击即可使用<br><br>
+                <strong>⚠️ 注意：</strong><br>
+                • 必须使用 <strong>Safari</strong> 浏览器<br>
+                • iOS 不支持安装 APK 文件<br>
+                • PWA 版本功能与原生 App 一致
             </div>
         </div>
-
-        <!-- Toast 提示 -->
-        <div class="toast" id="toast"></div>
     </div>
 
-    <script src="app.js"></script>
+    <script>
+        function showPlatform(platform) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.platform-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('platform-' + platform).classList.add('active');
+        }
+
+        // 自动检测平台
+        const ua = navigator.userAgent;
+        if (/iPhone|iPad|iPod/.test(ua)) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.platform-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab')[1].classList.add('active');
+            document.getElementById('platform-ios').classList.add('active');
+        }
+    </script>
 </body>
 </html>
